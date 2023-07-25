@@ -1,14 +1,27 @@
 import { Loader } from 'components/Loader/Loader';
 import { notificationOptions } from 'components/Notification/Notification';
-import React, { useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
+import {
+  Link,
+  NavLink,
+  Route,
+  Routes,
+  useLocation,
+  useParams,
+} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+// import Cast from './Cast';
+// import Reviews from './Reviews';
+const Reviews = lazy(() => import('./Reviews'));
+const Cast = lazy(() => import('./Cast'));
 
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     if (!movieId) return;
@@ -21,10 +34,6 @@ export const MovieDetails = () => {
         );
         const data = await response.json();
         setMovieDetails(data);
-        toast.success(
-          'Movie details were successfully fetched!',
-          notificationOptions
-        );
       } catch (error) {
         setError(error.message);
         toast.error(error.message, notificationOptions);
@@ -36,7 +45,8 @@ export const MovieDetails = () => {
   }, [movieId]);
   return (
     <div>
-      MovieDetails
+      <h1>MovieDetails</h1>
+      <Link to={backLink.current}>Go back</Link>
       {error !== null &&
         toast.error(
           `Oops, something went wrong. Please try again.`,
@@ -45,7 +55,14 @@ export const MovieDetails = () => {
       {isLoading && <Loader />}
       <div>
         <NavLink to="cast">Cast</NavLink>
+        <NavLink to="reviews">Reviews</NavLink>
       </div>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
       <ToastContainer />;
     </div>
   );

@@ -1,5 +1,7 @@
 import React from 'react';
 
-export const Cast = () => {
+const Cast = () => {
   return <div>Cast</div>;
 };
+
+export default Cast;
