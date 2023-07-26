@@ -13,7 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 // import Cast from './Cast';
 // import Reviews from './Reviews';
 const Reviews = lazy(() => import('./Reviews'));
-const Cast = lazy(() => import('./Cast'));
+const Cast = lazy(() => import('./Cast/Cast'));
 
 export const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
