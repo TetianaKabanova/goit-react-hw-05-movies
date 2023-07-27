@@ -5,7 +5,7 @@ export const ListMovies = styled.ul`
   list-style-type: none;
 `;
 
-export const MoviesItem = styled.li`
+export const MovieItem = styled.li`
   font-weight: 600;
   font-size: ${props => props.theme.fontSize.m};
   margin-bottom: ${props => props.theme.spacing(2.5)};

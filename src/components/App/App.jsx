@@ -1,9 +1,9 @@
 import { NavLink, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
-import { Loader } from 'components/Loader/Loader';
+import Loader from 'components/Loader/Loader';
 
 const LazyHome = lazy(() => import('pages/Home/Home'));
-const LazyMovies = lazy(() => import('pages/Movies'));
+const LazyMovies = lazy(() => import('pages/Movies/Movies'));
 const LazyMovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
 
 const App = () => {

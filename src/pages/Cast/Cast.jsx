@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { getMovieCast } from 'components/api/api';
-import { Loader } from 'components/Loader/Loader';
+import Loader from 'components/Loader/Loader';
 import {
   CastImage,
   DetailsItem,
@@ -11,7 +11,7 @@ import {
   ListCast,
 } from './Cast.styled';
 
-const Cast = () => {
+function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,6 +65,6 @@ const Cast = () => {
       </>
     </div>
   );
-};
+}
 
 export default Cast;
