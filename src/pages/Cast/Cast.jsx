@@ -18,6 +18,8 @@ const Cast = () => {
   const [, setError] = useState(null);
 
   useEffect(() => {
+    if (!movieId) return;
+
     async function fetchMovieCast() {
       try {
         setIsLoading(true);
@@ -61,7 +63,6 @@ const Cast = () => {
           <div>Sorry, there is no information about the actors.</div>
         )}
       </>
-      {/* {error && <div>{error}</div>} */}
     </div>
   );
 };

@@ -10,12 +10,12 @@ export const DetailsItem = styled.li`
 
 export const InfoName = styled.p`
   font-weight: 600;
-  font-size: ${props => props.theme.fontSizes.mediumX};
+  font-size: ${props => props.theme.fontSize.m};
   margin-bottom: ${props => props.theme.spacing(2.5)};
 `;
 
 export const InfoCharacter = styled.p`
-  font-size: ${props => props.theme.fontSizes.medium};
+  font-size: ${props => props.theme.fontSize.m};
 `;
 
 export const CastImage = styled.img`

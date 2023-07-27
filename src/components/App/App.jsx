@@ -2,11 +2,9 @@ import { NavLink, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import { Loader } from 'components/Loader/Loader';
 
-const Home = lazy(() => import('pages/Home'));
-const Movies = lazy(() => import('pages/Movies'));
-const MovieDetails = lazy(() => import('pages/MovieDetails'));
-const Cast = lazy(() => import('pages/Cast/Cast'));
-const Reviews = lazy(() => import('pages/Reviews'));
+const LazyHome = lazy(() => import('pages/Home/Home'));
+const LazyMovies = lazy(() => import('pages/Movies'));
+const LazyMovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
 
 const App = () => {
   return (
@@ -29,11 +27,12 @@ const App = () => {
       <main>
         <Suspense fallback={<Loader></Loader>}>
           <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/movies/*" element={<Movies />}></Route>
-            <Route path="/movies/:movieId/*" element={<MovieDetails />}></Route>
-            <Route path="cast" element={<Cast />}></Route>
-            <Route path="reviews" element={<Reviews />}></Route>
+            <Route path="/" element={<LazyHome />}></Route>
+            <Route path="/movies/" element={<LazyMovies />}></Route>
+            <Route
+              path="/movies/:movieId/*"
+              element={<LazyMovieDetails />}
+            ></Route>
           </Routes>
         </Suspense>
       </main>
