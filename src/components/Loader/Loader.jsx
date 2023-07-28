@@ -5,7 +5,7 @@ function Loader() {
   return (
     <Wrapper>
       <RotatingLines
-        strokeColor="#51E5FF"
+        strokeColor="#1b2a71"
         strokeWidth="5"
         animationDuration="0.75"
         width="96"

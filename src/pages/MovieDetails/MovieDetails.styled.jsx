@@ -1,6 +1,10 @@
 import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 
+export const MovieDetailsWrapper = styled.div`
+  padding: 15px;
+`;
+
 export const MovieContainer = styled.div`
   display: flex;
   align-items: center;
@@ -62,10 +66,17 @@ export const DetailsItem = styled.li`
 
 export const Link = styled(NavLink)`
   text-decoration: none;
-  color: ${props => props.theme.colors.dark};
+  color: ${props => props.theme.colors.white};
 
   &.active {
     color: ${props => props.theme.colors.success};
     border-bottom: 1px solid ${props => props.theme.colors.success};
   }
+`;
+
+export const BackLink = styled(NavLink)`
+  color: ${props => props.theme.colors.accent};
+  font-weight: bold;
+  font-size: ${props => props.theme.fontSize.l};
+  margin-bottom: ${props => props.theme.spacing(5)};
 `;

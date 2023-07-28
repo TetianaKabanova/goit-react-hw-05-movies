@@ -1,6 +1,4 @@
 import Loader from 'components/Loader/Loader';
-import { Message } from 'components/Message/Message';
-import MoviesList from 'components/MoviesList/MoviesList';
 import {
   errorMessage,
   notificationOptions,
@@ -8,11 +6,20 @@ import {
 import { getTrendingMovies } from 'components/api/api';
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import {
+  HomeContainer,
+  HomeLink,
+  HomeList,
+  HomeTitle,
+  Image,
+  MovieTitle,
+} from './Home.styled';
+import { Link } from 'react-router-dom';
+import poster from '../../components/images/coming soon.jpg';
 
 function Home() {
   const [movies, setMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [, setError] = useState(null);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -20,7 +27,6 @@ function Home() {
         setIsLoading(true);
         const results = await getTrendingMovies();
         setMovies(results);
-        setError(null);
       } catch (error) {
         toast.error(`${errorMessage}`, notificationOptions);
       } finally {
@@ -30,16 +36,30 @@ function Home() {
     fetchMovies();
   }, []);
 
-  return (
-    <div>
-      <h1>Home</h1>
-      <>
-        <Message>{'Trending today'}</Message>
-        <MoviesList movies={movies} />
+  const getImageUrl = path => {
+    return path ? `https://image.tmdb.org/t/p/w200/${path}` : poster;
+  };
 
-        {isLoading && <Loader />}
-      </>
-    </div>
+  return (
+    <HomeContainer>
+      <HomeTitle>Trending today</HomeTitle>
+      <HomeList>
+        {movies?.map(movie => (
+          <Link key={movie.id} to={`/movies/${movie.id}`}>
+            <HomeLink>
+              <Image
+                src={getImageUrl(movie.poster_path)}
+                alt={movie.title}
+                width={224}
+                height={325}
+              />
+              <MovieTitle>{movie.title}</MovieTitle>
+            </HomeLink>
+          </Link>
+        ))}
+      </HomeList>
+      {isLoading && <Loader />}
+    </HomeContainer>
   );
 }
 

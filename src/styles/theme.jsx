@@ -8,9 +8,12 @@ export const theme = {
     info: '#17a2b8',
     light: '#f8f9fa',
     dark: '#045CB4',
-    mainBackground: ['linear-gradient(to bottom, #f2f2f2, #9e9e9e)'],
+    mainBackground: [
+      'radial-gradient(circle, rgba(1,8,18,0.9948354341736695) 48%, rgba(43,60,139,1) 100%);',
+    ],
     tagBackground: ['linear-gradient(to bottom, #3f51b5, #3f51b5)'],
     white: '#ffffff',
+    accent: '#1b2a71',
   },
 
   // space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
@@ -35,6 +38,6 @@ export const theme = {
   },
   boxShadow: {
     textShadow: '0 1px 1px rgba(236, 230, 230, 0.05)',
-    boxShadow: ' inset 0 -5px 45px rgba(100, 100, 100, 0.2)',
+    boxShadow: '5px 5px 15px 5px #000000',
   },
 };
