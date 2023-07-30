@@ -1,9 +1,9 @@
 import { Link, Navigate, Route, Routes } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 import Loader from 'components/Loader/Loader';
-import { Header, HeaderList } from './App.styled';
+import { Header, HeaderList, HomeLink, MoviesLink } from './App.styled';
 import Cast from 'pages/Cast/Cast';
-import Reviews from 'pages/Reviews';
+import Reviews from 'pages/Reviews/Reviews';
 
 const LazyHome = lazy(() => import('pages/Home/Home'));
 const LazyMovies = lazy(() => import('pages/Movies/Movies'));
@@ -16,10 +16,10 @@ const App = () => {
         <nav>
           <HeaderList>
             <li>
-              <Link to="/">Home</Link>
+              <HomeLink to="/">Home</HomeLink>
             </li>
             <li>
-              <Link to="/movies">Movies</Link>
+              <MoviesLink to="/movies">Movies</MoviesLink>
             </li>
           </HeaderList>
         </nav>

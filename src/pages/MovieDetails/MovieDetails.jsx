@@ -5,17 +5,16 @@ import {
 } from 'components/Notification/Notification';
 import { getMovieDetails } from 'components/api/api';
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
-import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-  AdditionalInfoContainer,
+  AdditionalInfoLink,
   AdditionalInfoTitle,
   BackLink,
   DetailsInfo,
   DetailsItem,
-  GenresContainer,
-  GenresItem,
-  GenresList,
+  Genres,
+  GenresTitle,
   MovieContainer,
   MovieDetailsContainer,
   MovieDetailsWrapper,
@@ -23,9 +22,10 @@ import {
   MovieOverview,
   MovieTitle,
   MovieUserScore,
+  OverviewTitle,
 } from './MovieDetails.styled';
 
-const LazyReviews = lazy(() => import('../Reviews'));
+const LazyReviews = lazy(() => import('../Reviews/Reviews'));
 const LazyCast = lazy(() => import('../Cast/Cast'));
 
 function MovieDetails() {
@@ -86,14 +86,17 @@ function MovieDetails() {
         original_title,
       } && (
         <MovieContainer>
-          <MovieImage
-            src={
-              poster_path
-                ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                : `https://crawfordroofing.com.au/wp-content/uploads/2018/04/No-image-available.jpg`
-            }
-            alt={original_title}
-          />
+          <div>
+            <MovieImage
+              src={
+                poster_path
+                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                  : `https://crawfordroofing.com.au/wp-content/uploads/2018/04/No-image-available.jpg`
+              }
+              alt={original_title}
+            />
+          </div>
+
           <MovieDetailsContainer>
             <MovieTitle>
               {title} ({release_date && release_date.slice(0, 4)})
@@ -101,39 +104,33 @@ function MovieDetails() {
             <MovieUserScore>
               User score: {getUserScore(movieDetails.vote_average)}%
             </MovieUserScore>
-            <h2>Overview</h2>
+            <OverviewTitle>Overview</OverviewTitle>
             <MovieOverview>{overview}</MovieOverview>
-            <h2>Genres</h2>
-            {genres && genres.length > 0 && (
-              <GenresContainer>
-                <GenresList>
-                  {genres.map(genre => (
-                    <GenresItem key={genre.id}>{genre.name}</GenresItem>
-                  ))}
-                </GenresList>
-              </GenresContainer>
-            )}
+            <GenresTitle>Genres</GenresTitle>
+            <Genres>{genres.map(genre => genre.name).join(', ')}</Genres>
+
+            <AdditionalInfoTitle>Additional information</AdditionalInfoTitle>
+            <DetailsInfo>
+              <DetailsItem>
+                <AdditionalInfoLink to={`/movies/${movieId}/cast`}>
+                  Cast
+                </AdditionalInfoLink>
+              </DetailsItem>
+              <DetailsItem>
+                <AdditionalInfoLink to={`/movies/${movieId}/reviews`}>
+                  Reviews
+                </AdditionalInfoLink>
+              </DetailsItem>
+            </DetailsInfo>
           </MovieDetailsContainer>
         </MovieContainer>
       )}
-      <AdditionalInfoContainer>
-        <AdditionalInfoTitle>Additional information</AdditionalInfoTitle>
-        <DetailsInfo>
-          <DetailsItem>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-          </DetailsItem>
-          <DetailsItem>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-          </DetailsItem>
-        </DetailsInfo>
-
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            <Route path="cast" element={<LazyCast />} />
-            <Route path="reviews" element={<LazyReviews />} />
-          </Routes>
-        </Suspense>
-      </AdditionalInfoContainer>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="cast" element={<LazyCast />} />
+          <Route path="reviews" element={<LazyReviews />} />
+        </Routes>
+      </Suspense>
     </MovieDetailsWrapper>
   );
 }

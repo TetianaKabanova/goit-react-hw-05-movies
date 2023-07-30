@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  position: relative;
-  margin-bottom: ${props => props.theme.spacing(4)};
-  text-transform: uppercase;
+  padding: ${props => props.theme.spacing(4)};
 `;
 
 export const Form = styled.form`
@@ -16,6 +16,7 @@ export const Form = styled.form`
   background-color: ${props => props.theme.colors.white};
   border-radius: ${props => props.theme.spacing(0.75)};
   overflow: hidden;
+  border: 1px solid ${props => props.theme.colors.grey};
 `;
 
 export const Span = styled.span`
@@ -31,14 +32,9 @@ export const Span = styled.span`
 `;
 
 export const SubmitButton = styled.button`
-  display: inline-block;
   width: ${props => props.theme.spacing(12)};
   height: ${props => props.theme.spacing(12)};
-  border: 0;
-
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center;
+  border: none;
   opacity: 0.6;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
@@ -51,12 +47,11 @@ export const SubmitButton = styled.button`
 
 export const Icon = styled.div`
   display: flex;
-  padding: ${props => props.theme.spacing(2.5)};
   justify-content: center;
 
   & svg {
-    width: ${props => props.theme.spacing(7.5)};
-    height: ${props => props.theme.spacing(7.5)};
+    width: ${props => props.theme.spacing(6.5)};
+    height: ${props => props.theme.spacing(6.5)};
     fill: ${props => props.theme.colors.secondary};
   }
 `;
@@ -65,12 +60,11 @@ export const Input = styled.input`
   display: inline-block;
   width: 100%;
   font: inherit;
-  font-size: ${props => props.theme.spacing(5)};
+  font-size: ${props => props.theme.fontSize.m};
   border: none;
   outline: none;
   padding-left: ${props => props.theme.spacing(1.5)};
   padding-right: ${props => props.theme.spacing(1.5)};
-  padding-bottom: ${props => props.theme.spacing(1.5)};
 
   ::placeholder {
     font: inherit;

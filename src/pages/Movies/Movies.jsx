@@ -5,10 +5,12 @@ import {
   notificationOptions,
 } from 'components/Notification/Notification';
 import Searchbar from 'components/Searchbar/Searchbar';
+
 import { getSearchMovie } from 'components/api/api';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { MoviesContainer } from './Movies.styled';
 
 function Movies() {
   const [searchMovies, setSearchMovies] = useState([]);
@@ -39,14 +41,11 @@ function Movies() {
   };
 
   return (
-    <div>
-      <h1>Movies</h1>
-      <>
-        <Searchbar onSubmit={handleSubmitSearchTerm} />
-        {isLoading && <Loader />}
-        {searchMovies && <MoviesList movies={searchMovies} />}
-      </>
-    </div>
+    <MoviesContainer>
+      <Searchbar onSubmit={handleSubmitSearchTerm} />
+      {isLoading && <Loader />}
+      {searchMovies && <MoviesList movies={searchMovies} />}
+    </MoviesContainer>
   );
 }
 

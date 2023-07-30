@@ -6,6 +6,7 @@ export const HomeContainer = styled.div`
 
 export const HomeTitle = styled.h1`
   color: ${props => props.theme.colors.accent};
+  text-align: center;
 `;
 
 export const HomeList = styled.ul`
@@ -18,7 +19,7 @@ export const HomeList = styled.ul`
 
 export const HomeLink = styled.li`
   width: 224px;
-  height: 325px;
+  height: 324px;
   cursor: pointer;
   border-radius: 5px;
   position: relative;
@@ -41,7 +42,7 @@ export const Image = styled.img`
 export const MovieTitle = styled.p`
   position: absolute;
   bottom: 0;
-  padding-left: ${props => props.theme.spacing(3)};
-  padding-right: ${props => props.theme.spacing(3)};
+  padding-left: ${props => props.theme.spacing(2.5)};
+  padding-right: ${props => props.theme.spacing(2.5)};
   color: ${props => props.theme.colors.white};
 `;
