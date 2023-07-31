@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import { getMovieCast } from 'components/api/api';
 import Loader from 'components/Loader/Loader';
 import {
@@ -10,13 +10,19 @@ import {
   InfoCharacter,
   InfoName,
   ListCast,
+  NoCastInfo,
 } from './Cast.styled';
+import {
+  errorMessage,
+  notificationOptions,
+} from 'components/Notification/Notification';
+
+import noImageAvailable from 'components/images/NoImageAvailable.jpg';
 
 function Cast() {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [, setError] = useState(null);
 
   useEffect(() => {
     if (!movieId) return;
@@ -25,11 +31,9 @@ function Cast() {
       try {
         setIsLoading(true);
         const cast = await getMovieCast(movieId);
-
         setCast(cast);
-        setError(null);
       } catch (error) {
-        toast.error('Oops, something went wrong. Please try again.');
+        toast.error(`${errorMessage}`, notificationOptions);
       } finally {
         setIsLoading(false);
       }
@@ -38,29 +42,34 @@ function Cast() {
     fetchMovieCast();
   }, [movieId]);
 
+  const getPhotoUrl = path => {
+    return path ? `https://image.tmdb.org/t/p/w200/${path}` : noImageAvailable;
+  };
+
   return (
     <CastContainer>
       {isLoading && <Loader />}
-
-      <ListCast>
-        {cast.map(({ id, profile_path, original_name, name, character }) => (
-          <DetailsItem key={id}>
-            <CastImage
-              src={
-                profile_path
-                  ? `https://image.tmdb.org/t/p/w500${profile_path}`
-                  : `https://crawfordroofing.com.au/wp-content/uploads/2018/04/No-image-available.jpg`
-              }
-              alt={original_name}
-            />
-            <InfoName>{name}</InfoName>
-            <InfoCharacter>Character: {character}</InfoCharacter>
-          </DetailsItem>
-        ))}
-      </ListCast>
-      {cast.length === 0 && (
-        <div>Sorry, there is no information about the actors.</div>
+      {cast.length > 0 ? (
+        <ListCast>
+          {cast.map(({ id, profile_path, original_name, name, character }) => (
+            <DetailsItem key={id}>
+              <CastImage
+                src={getPhotoUrl(profile_path)}
+                alt={original_name}
+                width={150}
+                height={200}
+              />
+              <InfoName>{name}</InfoName>
+              <InfoCharacter>Character: {character}</InfoCharacter>
+            </DetailsItem>
+          ))}
+        </ListCast>
+      ) : (
+        <NoCastInfo>
+          Sorry, there is no information about the actors.
+        </NoCastInfo>
       )}
+      <ToastContainer />
     </CastContainer>
   );
 }

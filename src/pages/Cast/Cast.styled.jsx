@@ -41,3 +41,10 @@ export const CastImage = styled.img`
     scale: 1.1;
   }
 `;
+
+export const NoCastInfo = styled.p`
+  font-weight: 500;
+  font-size: ${props => props.theme.fontSize.l};
+  color: ${props => props.theme.colors.accent};
+  text-align: center;
+`;

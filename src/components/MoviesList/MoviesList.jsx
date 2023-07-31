@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Image,
   ListMovies,
-  MovieItem,
+  MovieImageLink,
   MovieTitle,
   MoviesListContainer,
 } from './MoviesList.styled';
@@ -20,19 +20,21 @@ function MoviesList({ movies }) {
     <MoviesListContainer>
       <ListMovies>
         {movies?.map(movie => (
-          <MovieItem key={movie.id}>
-            <Link to={`/movies/${movie.id}`} state={{ from: location }}>
-              <MovieImageLink>
-                <Image
-                  src={getImageUrl(movie.poster_path)}
-                  alt={movie.title}
-                  width={224}
-                  height={324}
-                />
-              </MovieImageLink>
+          <Link
+            key={movie.id}
+            to={`/movies/${movie.id}`}
+            state={{ from: location }}
+          >
+            <MovieImageLink>
+              <Image
+                src={getImageUrl(movie.poster_path)}
+                alt={movie.title}
+                width={224}
+                height={324}
+              />
               <MovieTitle>{movie.title}</MovieTitle>
-            </Link>
-          </MovieItem>
+            </MovieImageLink>
+          </Link>
         ))}
       </ListMovies>
     </MoviesListContainer>

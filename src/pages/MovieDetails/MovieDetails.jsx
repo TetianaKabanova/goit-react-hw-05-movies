@@ -6,7 +6,7 @@ import {
 import { getMovieDetails } from 'components/api/api';
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Route, Routes, useLocation, useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import {
   AdditionalInfoLink,
   AdditionalInfoTitle,
@@ -24,6 +24,7 @@ import {
   MovieUserScore,
   OverviewTitle,
 } from './MovieDetails.styled';
+import poster from 'components/images/coming soon.jpg';
 
 const LazyReviews = lazy(() => import('../Reviews/Reviews'));
 const LazyCast = lazy(() => import('../Cast/Cast'));
@@ -52,6 +53,10 @@ function MovieDetails() {
 
     fetchMovieDetails();
   }, [movieId]);
+
+  const getImageUrl = path => {
+    return path ? `https://image.tmdb.org/t/p/w500/${path}` : poster;
+  };
 
   if (!movieDetails) {
     return;
@@ -87,14 +92,7 @@ function MovieDetails() {
       } && (
         <MovieContainer>
           <div>
-            <MovieImage
-              src={
-                poster_path
-                  ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                  : `https://crawfordroofing.com.au/wp-content/uploads/2018/04/No-image-available.jpg`
-              }
-              alt={original_title}
-            />
+            <MovieImage src={getImageUrl(poster_path)} alt={original_title} />
           </div>
 
           <MovieDetailsContainer>
@@ -131,6 +129,7 @@ function MovieDetails() {
           <Route path="reviews" element={<LazyReviews />} />
         </Routes>
       </Suspense>
+      <ToastContainer />
     </MovieDetailsWrapper>
   );
 }

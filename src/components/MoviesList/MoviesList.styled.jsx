@@ -13,7 +13,7 @@ export const ListMovies = styled.ul`
   justify-content: center;
 `;
 
-export const MovieItem = styled.li`
+export const MovieImageLink = styled.li`
   width: 224px;
   height: 324px;
   border-radius: 5px;
@@ -54,3 +54,5 @@ export const MovieTitle = styled.h3`
   padding-right: ${props => props.theme.spacing(2.5)};
   color: ${props => props.theme.colors.white};
 `;
+
+export const MovieItem = styled.li``;

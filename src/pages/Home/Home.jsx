@@ -5,7 +5,7 @@ import {
 } from 'components/Notification/Notification';
 import { getTrendingMovies } from 'components/api/api';
 import React, { useEffect, useState } from 'react';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import {
   HomeContainer,
   HomeLink,
@@ -59,6 +59,7 @@ function Home() {
         ))}
       </HomeList>
       {isLoading && <Loader />}
+      <ToastContainer />
     </HomeContainer>
   );
 }

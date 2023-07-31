@@ -26,28 +26,7 @@ export const HeaderList = styled.ul`
   gap: ${props => props.theme.spacing(2)};
 `;
 
-export const HomeLink = styled(NavLink)`
-  position: relative;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  color: ${props => props.theme.colors.white};
-  text-decoration: none;
-  border-radius: ${props => props.theme.spacing(8)};
-  border: 1px solid #fff;
-  border-spacing: 0;
-  padding-left: ${props => props.theme.spacing(5)};
-  padding-right: ${props => props.theme.spacing(5)};
-  padding-top: ${props => props.theme.spacing(1.5)};
-  padding-bottom: ${props => props.theme.spacing(1.5)};
-
-  &.active {
-    color: ${props => props.theme.colors.white};
-    background-color: ${props => props.theme.colors.primary};
-  }
-`;
-
-export const MoviesLink = styled(NavLink)`
+export const Link = styled(NavLink)`
   position: relative;
   top: 0;
   left: 0;
